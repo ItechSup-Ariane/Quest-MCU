@@ -101,4 +101,37 @@ class Formation
     {
         return $this->promotion;
     }
+
+    /**
+     * Add etudiants
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiants
+     * @return Formation
+     */
+    public function addEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiants)
+    {
+        $this->etudiants[] = $etudiants;
+
+        return $this;
+    }
+
+    /**
+     * Remove etudiants
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiants
+     */
+    public function removeEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiants)
+    {
+        $this->etudiants->removeElement($etudiants);
+    }
+
+    /**
+     * Get etudiants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEtudiants()
+    {
+        return $this->etudiants;
+    }
 }

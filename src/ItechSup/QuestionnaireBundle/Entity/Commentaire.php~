@@ -106,4 +106,50 @@ class Commentaire
     {
         return $this->zoneDeTexte;
     }
+
+    /**
+     * Set questionnaire
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire
+     * @return Commentaire
+     */
+    public function setQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire = null)
+    {
+        $this->questionnaire = $questionnaire;
+
+        return $this;
+    }
+
+    /**
+     * Get questionnaire
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Questionnaire 
+     */
+    public function getQuestionnaire()
+    {
+        return $this->questionnaire;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Question $question
+     * @return Commentaire
+     */
+    public function setQuestion(\ItechSup\QuestionnaireBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
 }

@@ -9,32 +9,31 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
+        
     /**
-     * @Route("/soumission/{id}", name="soumission")
-     * @Method({"POST"})
-     */
-    public function indexAction($id){
-        return $this->render('ItechSupQuestionnaireBundle:Default:index.html.twig', array(
-            'id' => $id
-        ));
-    }
-    
-    /**
-     * @Route("/{id}", name="afficher_questionnaire")
+     * @Route("/choix/{id}", name="afficher_questionnaire")
      * 
      */
     public function afficherAction($id){
         $em = $this->getDoctrine()->getManager();
 
         $questionnaire = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
-
         if (!$questionnaire) {
             throw $this->createNotFoundException('Impossible de trouver ce questionnaire');
         }
 
         return $this->render('ItechSupQuestionnaireBundle:Default:afficher.html.twig', array(
-            'questionnaire' => $questionnaire
+            'questionnaire' => $questionnaire,
         ));
     }
     
+    /**
+     * @Route("/soumission/{id}", name="soumission")
+     * @Method({"POST"})
+     */
+    public function validationAction($id){
+        return $this->render('ItechSupQuestionnaireBundle:Default:index.html.twig', array(
+            'id' => $id
+        ));
+    }
 }

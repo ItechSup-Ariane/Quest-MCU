@@ -3,6 +3,7 @@
 namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Etudiant
@@ -36,11 +37,11 @@ class Etudiant
     private $prenom;
 
     /**
-     *
-     * @var Questionnaire
-     * @ORM\OneToOne(targetEntity="Questionnaire") 
-     */
-    private $questionnaire;
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Questionnaire", inversedBy="etudiants")
+     * @ORM\JoinTable(name="etudiants_questionnaires")
+     **/
+     private $questionnaires;
     
     /**
      *
@@ -50,10 +51,16 @@ class Etudiant
      */
     private $formation;
     
+    public function __construct() {
+        $this->questionnaires = new ArrayCollection();
+    }
+
+   
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -64,6 +71,7 @@ class Etudiant
      * Set nom
      *
      * @param string $nom
+     *
      * @return Etudiant
      */
     public function setNom($nom)
@@ -76,7 +84,7 @@ class Etudiant
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -87,6 +95,7 @@ class Etudiant
      * Set prenom
      *
      * @param string $prenom
+     *
      * @return Etudiant
      */
     public function setPrenom($prenom)
@@ -99,7 +108,7 @@ class Etudiant
     /**
      * Get prenom
      *
-     * @return string 
+     * @return string
      */
     public function getPrenom()
     {
@@ -107,32 +116,44 @@ class Etudiant
     }
 
     /**
-     * Set questionnaire
+     * Add questionnaire
      *
      * @param \ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire
+     *
      * @return Etudiant
      */
-    public function setQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire = null)
+    public function addQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire)
     {
-        $this->questionnaire = $questionnaire;
+        $this->questionnaires[] = $questionnaire;
 
         return $this;
     }
 
     /**
-     * Get questionnaire
+     * Remove questionnaire
      *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Questionnaire 
+     * @param \ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire
      */
-    public function getQuestionnaire()
+    public function removeQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire)
     {
-        return $this->questionnaire;
+        $this->questionnaires->removeElement($questionnaire);
+    }
+
+    /**
+     * Get questionnaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestionnaires()
+    {
+        return $this->questionnaires;
     }
 
     /**
      * Set formation
      *
      * @param \ItechSup\QuestionnaireBundle\Entity\Formation $formation
+     *
      * @return Etudiant
      */
     public function setFormation(\ItechSup\QuestionnaireBundle\Entity\Formation $formation = null)
@@ -145,7 +166,7 @@ class Etudiant
     /**
      * Get formation
      *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Formation 
+     * @return \ItechSup\QuestionnaireBundle\Entity\Formation
      */
     public function getFormation()
     {

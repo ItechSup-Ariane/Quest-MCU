@@ -30,19 +30,16 @@ class Reponse
     private $libelle;
     
     /**
-     *
-     * @var Question
-     * @ORM\ManyToOne(targetEntity="Question",inversedBy="reponses")
-     * @ORM\JoinColumn(name="question_id",referencedColumnName="id")
-     */
+     * @ORM\OneToOne(targetEntity="Question")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     **/
     private $question;
     
     /**
-     *
-     * @var ArrayCollection()
-     * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="reponsen")
-     */
-    private $commentaire;
+     * @ORM\OneToOne(targetEntity="Etudiant")
+     * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id")
+     **/
+    private $etudiant;
     
     
     public function __construct() {
@@ -103,5 +100,28 @@ class Reponse
     public function getQuestion()
     {
         return $this->question;
+    }
+    
+    /**
+     * Set etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     * @return reponse
+     */
+    public function setEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant = null)
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Get etudiant
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Etudiant
+     */
+    public function getEtudiant()
+    {
+        return $this->etudiant;
     }
 }

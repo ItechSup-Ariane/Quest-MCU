@@ -3,6 +3,7 @@
 namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Question
@@ -39,9 +40,8 @@ class Question
     /**
      *
      * @var Reponse
-     * @ORM\OneToOne(targetEntity="Reponse") 
+     * @ORM\OneToOne(targetEntity="Reponse",mappedBy="question")
      */
- 
     private $reponse;
     
     /**
@@ -49,42 +49,12 @@ class Question
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="question")
      */
-    private $commentaires;
+    private $commentaire;
     
     
     public function __construct() {
-        $this->commentaires = new ArrayCollection();
-    }
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
+        $this->commentaire = new ArrayCollection();
+        $this->reponses = new ArrayCollection();
     }
 
-    /**
-     * Set libelle
-     *
-     * @param string $libelle
-     * @return Question
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string 
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
 }

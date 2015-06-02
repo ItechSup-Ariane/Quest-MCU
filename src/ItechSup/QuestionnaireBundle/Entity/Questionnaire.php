@@ -27,6 +27,11 @@ class Questionnaire
      * @ORM\Column(name="titre", type="string", length=255)
      */
     private $titre;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Etudiant", mappedBy="questionnaires")
+     **/
+    private $etudiants;
 
     /**
      *
@@ -46,6 +51,7 @@ class Questionnaire
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
     }
     /**
      * Get id
@@ -144,5 +150,39 @@ class Questionnaire
     public function getCommentaires()
     {
         return $this->commentaires;
+    }
+
+    /**
+     * Add etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     *
+     * @return Questionnaire
+     */
+    public function addEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
+    {
+        $this->etudiants[] = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Remove etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     */
+    public function removeEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
+    {
+        $this->etudiants->removeElement($etudiant);
+    }
+
+    /**
+     * Get etudiants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtudiants()
+    {
+        return $this->etudiants;
     }
 }

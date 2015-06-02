@@ -3,6 +3,7 @@
 namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Categorie
@@ -103,5 +104,38 @@ class Categorie
     public function getQuestionnaire()
     {
         return $this->questionnaire;
+    }
+
+    /**
+     * Add questions
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Question $questions
+     * @return Categorie
+     */
+    public function addQuestion(\ItechSup\QuestionnaireBundle\Entity\Question $questions)
+    {
+        $this->questions[] = $questions;
+
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Question $questions
+     */
+    public function removeQuestion(\ItechSup\QuestionnaireBundle\Entity\Question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
     }
 }

@@ -3,6 +3,7 @@
 namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Reponse
@@ -24,9 +25,26 @@ class Reponse
     /**
      * @var string
      *
-     * @ORM\Column(name="note", type="string", length=255)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
-    private $note;
+    private $libelle;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Question")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     **/
+    private $question;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Etudiant")
+     * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id")
+     **/
+    private $etudiant;
+    
+    
+    public function __construct() {
+        $this->commentaire = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -39,25 +57,71 @@ class Reponse
     }
 
     /**
-     * Set note
+     * Set libelle
      *
-     * @param string $note
+     * @param string $libelle
      * @return Reponse
      */
-    public function setNote($note)
+    public function setLibelle($libelle)
     {
-        $this->note = $note;
+        $this->libelle = $libelle;
 
         return $this;
     }
 
     /**
-     * Get note
+     * Get libelle
      *
      * @return string 
      */
-    public function getNote()
+    public function getLibelle()
     {
-        return $this->note;
+        return $this->libelle;
+    }
+    
+    /**
+     * Set question
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Question $question
+     * @return reponse
+     */
+    public function setQuestion(\ItechSup\QuestionnaireBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+    
+    /**
+     * Set etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     * @return reponse
+     */
+    public function setEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant = null)
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Get etudiant
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Etudiant
+     */
+    public function getEtudiant()
+    {
+        return $this->etudiant;
     }
 }

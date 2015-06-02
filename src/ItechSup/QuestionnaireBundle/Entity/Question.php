@@ -39,10 +39,10 @@ class Question
     
     /**
      *
-     * @var ArrayCollection()
-     * @ORM\OneToMany(targetEntity="Reponse",mappedBy="question")
+     * @var Reponse
+     * @ORM\OneToOne(targetEntity="Reponse",mappedBy="question")
      */
-    private $reponses;
+    private $reponse;
     
     /**
      *
@@ -56,10 +56,12 @@ class Question
         $this->commentaire = new ArrayCollection();
         $this->reponses = new ArrayCollection();
     }
+
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,6 +72,7 @@ class Question
      * Set libelle
      *
      * @param string $libelle
+     *
      * @return Question
      */
     public function setLibelle($libelle)
@@ -82,7 +85,7 @@ class Question
     /**
      * Get libelle
      *
-     * @return string 
+     * @return string
      */
     public function getLibelle()
     {
@@ -93,6 +96,7 @@ class Question
      * Set categorie
      *
      * @param \ItechSup\QuestionnaireBundle\Entity\Categorie $categorie
+     *
      * @return Question
      */
     public function setCategorie(\ItechSup\QuestionnaireBundle\Entity\Categorie $categorie = null)
@@ -105,7 +109,7 @@ class Question
     /**
      * Get categorie
      *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Categorie 
+     * @return \ItechSup\QuestionnaireBundle\Entity\Categorie
      */
     public function getCategorie()
     {
@@ -113,68 +117,59 @@ class Question
     }
 
     /**
-     * Add reponse
+     * Set reponse
      *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponses
+     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
+     *
      * @return Question
      */
-    public function addReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponses)
+    public function setReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse = null)
     {
-        $this->reponse[] = $reponses;
+        $this->reponse = $reponse;
 
         return $this;
     }
 
-    /**
-     * Remove reponse
-     *
-     * @return Question
-     * @return \ItechSup\QuestionnaireBundle\Entity\Reponse 
-     */
-    public function removeReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponses)
-    {
-        return $this->reponse->removeElement($reponses);
-    }
-    
     /**
      * Get reponse
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \ItechSup\QuestionnaireBundle\Entity\Reponse
      */
-    public function getReponses()
+    public function getReponse()
     {
-        return $this->reponses;
+        return $this->reponse;
     }
 
-    /**q
-     * Add commentaires
+    /**
+     * Add commentaire
      *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaires
+     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire
+     *
      * @return Question
      */
-    public function addCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaires)
+    public function addCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaire[] = $commentaires;
+        $this->commentaire[] = $commentaire;
 
         return $this;
     }
 
     /**
-     * Remove commentaires
+     * Remove commentaire
      *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaires
+     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire
      */
-    public function removeCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaires)
+    public function removeCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire)
     {
-        $this->commentaire->removeElement($commentaires);
+        $this->commentaire->removeElement($commentaire);
     }
 
     /**
-     * Get commentaires
+     * Get commentaire
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCommentaires()
+    public function getCommentaire()
     {
         return $this->commentaire;
     }

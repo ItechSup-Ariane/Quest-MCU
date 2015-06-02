@@ -1,0 +1,5 @@
+itech_sup_questionnaire:
+    resource: "@ItechSupQuestionnaireBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

@@ -1,0 +1,25 @@
+{% block body -%}
+    <h1>{{ questionnaire.titre }}</h1>
+    <form action="{{ path('soumission', {'id':questionnaire.id}) }}" method="post">
+        <table class="questionnaire">
+            <tbody>
+                {% for categ in questionnaire.categories %}
+                    <tr>
+                        <td><strong><u>{{ categ.libelle }}</u></strong></td>
+                    </tr>
+                    {% for quest in categ.questions %}
+                        <tr>
+                            <td><i>{{ quest.libelle }}</i></td>
+
+                            {% for rep in quest.reponses %}
+                                <td><label>{{ rep.libelle }}</label><input type="radio" name={{ quest.id }} value={{ rep.libelle }}></td>
+                            {% endfor %} 
+                        </tr>
+                    {% endfor %}    
+                {% endfor %}
+                
+            </tbody>
+        </table>
+        <input type="submit" id="submit" value="Envoyer" name="submit">
+    </form>        
+{% endblock %}

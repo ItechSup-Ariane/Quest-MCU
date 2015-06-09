@@ -13,7 +13,7 @@ use ItechSup\QuestionnaireBundle\Form\CommentaireType;
 /**
  * Commentaire controller.
  *
- * @Route("/commentaire")
+ * @Route("/admin/commentaire")
  */
 class CommentaireController extends Controller
 {
@@ -25,8 +25,7 @@ class CommentaireController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction(){
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ItechSupQuestionnaireBundle:Commentaire')->findAll();

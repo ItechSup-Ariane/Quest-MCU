@@ -4,6 +4,7 @@ namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * ReponseRepository
  *
@@ -12,4 +13,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class ReponseRepository extends EntityRepository
 {
+    
 }

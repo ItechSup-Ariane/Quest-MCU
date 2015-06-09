@@ -13,7 +13,7 @@ use ItechSup\QuestionnaireBundle\Form\QuestionType;
 /**
  * Question controller.
  *
- * @Route("/question")
+ * @Route("/admin/question")
  */
 class QuestionController extends Controller
 {

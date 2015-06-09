@@ -39,10 +39,10 @@ class Question
     
     /**
      *
-     * @var Reponse
-     * @ORM\OneToOne(targetEntity="Reponse",mappedBy="question")
+     * @var ArrayCollection()
+     * @ORM\OneToMany(targetEntity="Reponse",mappedBy="question")
      */
-    private $reponse;
+    private $reponses;
     
     /**
      *
@@ -57,4 +57,98 @@ class Question
         $this->reponses = new ArrayCollection();
     }
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Question
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Categorie $categorie
+     *
+     * @return Question
+     */
+    public function setCategorie(\ItechSup\QuestionnaireBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+
+
+    /**
+     * Add commentaire
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire
+     *
+     * @return Question
+     */
+    public function addCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\ItechSup\QuestionnaireBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaire->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
 }

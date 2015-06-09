@@ -43,6 +43,14 @@ class Etudiant
      **/
      private $questionnaires;
     
+     
+     /**
+     *
+     * @var ArrayCollection()
+     * @ORM\OneToMany(targetEntity="Reponse",mappedBy="etudiant")
+     */
+    private $reponses;
+    
     /**
      *
      * @var Formation
@@ -171,5 +179,39 @@ class Etudiant
     public function getFormation()
     {
         return $this->formation;
+    }
+
+    /**
+     * Add reponse
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
+     *
+     * @return Etudiant
+     */
+    public function addReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses[] = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove reponse
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
+     */
+    public function removeReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 }

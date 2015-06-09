@@ -25,18 +25,18 @@ class Reponse
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="note", type="string", length=255)
      */
-    private $libelle;
+    private $note;
     
     /**
-     * @ORM\OneToOne(targetEntity="Question")
+     * @ORM\ManyToOne(targetEntity="Question",inversedBy="reponses")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      **/
     private $question;
     
     /**
-     * @ORM\OneToOne(targetEntity="Etudiant")
+     * @ORM\ManyToOne(targetEntity="Etudiant",inversedBy="reponses")
      * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id")
      **/
     private $etudiant;
@@ -59,12 +59,12 @@ class Reponse
     /**
      * Set libelle
      *
-     * @param string $libelle
+     * @param string $note
      * @return Reponse
      */
-    public function setLibelle($libelle)
+    public function setNote($note)
     {
-        $this->libelle = $libelle;
+        $this->note = $note;
 
         return $this;
     }
@@ -74,9 +74,9 @@ class Reponse
      *
      * @return string 
      */
-    public function getLibelle()
+    public function getNote()
     {
-        return $this->libelle;
+        return $this->note;
     }
     
     /**
@@ -102,11 +102,14 @@ class Reponse
         return $this->question;
     }
     
+    
+
     /**
      * Set etudiant
      *
      * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
-     * @return reponse
+     *
+     * @return Reponse
      */
     public function setEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant = null)
     {

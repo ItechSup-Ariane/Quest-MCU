@@ -13,7 +13,7 @@ use ItechSup\QuestionnaireBundle\Form\CategorieType;
 /**
  * Categorie controller.
  *
- * @Route("/categorie")
+ * @Route("/admin/categorie")
  */
 class CategorieController extends Controller
 {

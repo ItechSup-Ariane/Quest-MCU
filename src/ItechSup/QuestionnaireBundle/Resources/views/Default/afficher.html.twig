@@ -1,4 +1,4 @@
-{% block body -%}
+{% block body %}
     <h1>{{ questionnaire.titre }}</h1>
     <form action="{{ path('soumission', {'id':questionnaire.id}) }}" method="post">
         <table class="questionnaire">

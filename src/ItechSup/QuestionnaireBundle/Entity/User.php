@@ -23,10 +23,40 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
+    
+    /**
+    * @ORM\OneToOne(targetEntity="Etudiant")
+    * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id",nullable=true)
+    */
+    protected $etudiant;
+    
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    /**
+     * Set etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     *
+     * @return User
+     */
+    public function setEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant = null)
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Get etudiant
+     *
+     * @return \ItechSup\QuestionnaireBundle\Entity\Etudiant
+     */
+    public function getEtudiant()
+    {
+        return $this->etudiant;
     }
 }

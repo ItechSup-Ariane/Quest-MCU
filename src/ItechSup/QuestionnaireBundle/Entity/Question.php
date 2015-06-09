@@ -39,10 +39,10 @@ class Question
     
     /**
      *
-     * @var Reponse
-     * @ORM\OneToOne(targetEntity="Reponse",mappedBy="question")
+     * @var ArrayCollection()
+     * @ORM\OneToMany(targetEntity="Reponse",mappedBy="question")
      */
-    private $reponse;
+    private $reponses;
     
     /**
      *
@@ -116,29 +116,7 @@ class Question
         return $this->categorie;
     }
 
-    /**
-     * Set reponse
-     *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
-     *
-     * @return Question
-     */
-    public function setReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse = null)
-    {
-        $this->reponse = $reponse;
 
-        return $this;
-    }
-
-    /**
-     * Get reponse
-     *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Reponse
-     */
-    public function getReponse()
-    {
-        return $this->reponse;
-    }
 
     /**
      * Add commentaire
@@ -172,5 +150,39 @@ class Question
     public function getCommentaire()
     {
         return $this->commentaire;
+    }
+
+    /**
+     * Add reponse
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
+     *
+     * @return Question
+     */
+    public function addReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses[] = $reponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove reponse
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Reponse $reponse
+     */
+    public function removeReponse(\ItechSup\QuestionnaireBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Get reponses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
     }
 }

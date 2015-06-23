@@ -25,14 +25,47 @@ class User extends BaseUser
     protected $id;
     
     /**
-    * @ORM\OneToOne(targetEntity="Etudiant")
-    * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id",nullable=true)
-    */
-    protected $etudiant;
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255)
+     */
+    private $prenom;
+    
+    /**
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Questionnaire", inversedBy="etudiants")
+     * @ORM\JoinTable(name="etudiants_questionnaires")
+     **/
+     private $questionnaires;
+    
+     
+     /**
+     *
+     * @var ArrayCollection()
+     * @ORM\OneToMany(targetEntity="Reponse",mappedBy="etudiant")
+     */
+    private $reponses;
+    
+    /**
+     *
+     * @var Formation
+     * @ORM\ManyToOne(targetEntity="Formation",inversedBy="etudiants")
+     * @ORM\JoinColumn(name="formation_id",referencedColumnName="id")
+     */
+    private $formation;
     
     public function __construct()
     {
         parent::__construct();
         // your own logic
     }
+
+    
 }

@@ -29,7 +29,7 @@ class Questionnaire
     private $titre;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Etudiant", mappedBy="questionnaires")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="questionnaires")
      **/
     private $etudiants;
 

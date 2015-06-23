@@ -1,1 +1,16 @@
-{{id}}
+{% block body %}
+    <h1>Selectionner le formulaire:</h1>
+    <div name='choixQuestionnaire'>
+        <ul>
+            {% for questionnaire in questionnaires %}
+                <li><a href={{ path('afficher_questionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.titre }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <form action={{ path('index_admin') }}>
+          <input type='submit'  value='Administrateur'/>
+    </form>
+    
+    <a href='/login'> Connecté en tant que : {{ name }} </a>
+    
+{% endblock %}

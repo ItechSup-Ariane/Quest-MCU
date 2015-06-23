@@ -1,0 +1,19 @@
+{% block body %}
+    <h1>Selectionner le formulaire pour avoir son résumé:</h1>
+    <div name='choixQuestionnaire'>
+        <ul>
+            {% for questionnaire in questionnaires %}
+                <li><a href={{ path('resumeQuestionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.titre }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div name='gestionQuestionnaire'>
+        <ul>
+            <li><a href={{ path('questionnaire')}}>Gestion des questionnaires</a></li>
+            <li><a href={{ path('categorie')}}>Gestion des catégories</a></li>
+            <li><a href={{ path('question')}}>Gestion des questions</a></li>
+            <li><a href={{ path('user')}}>Gestion des utilisateurs</a></li>
+        </ul>
+    </div>
+                
+{% endblock %}

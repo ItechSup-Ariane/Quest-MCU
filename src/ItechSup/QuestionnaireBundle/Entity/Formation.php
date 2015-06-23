@@ -38,7 +38,7 @@ class Formation
     /**
      *
      * @var ArrayCollection()
-     * @ORM\OneToMany(targetEntity="Etudiant",mappedBy="formation")
+     * @ORM\OneToMany(targetEntity="User",mappedBy="formation")
      */
     private $etudiants;
     

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class QuestionnaireType extends AbstractType
+class UserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,8 +15,10 @@ class QuestionnaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-            ->add('etudiants','entity',array('class'=>'ItechSupQuestionnaireBundle:User','multiple'=>true,'property'=>'username'))
+            ->add('nom')
+            ->add('prenom')
+            ->add('questionnaires','entity',array('class'=>'ItechSupQuestionnaireBundle:Questionnaire','multiple'=>true,'property'=>'libelle'))
+            ->add('formation',null,array('property'=>'libelle'))
         ;
     }
     
@@ -26,7 +28,7 @@ class QuestionnaireType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Questionnaire'
+            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\User'
         ));
     }
 
@@ -35,6 +37,6 @@ class QuestionnaireType extends AbstractType
      */
     public function getName()
     {
-        return 'itechsup_questionnairebundle_questionnaire';
+        return 'itechsup_questionnairebundle_user';
     }
 }

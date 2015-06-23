@@ -10,9 +10,26 @@ use ItechSup\QuestionnaireBundle\Entity\Reponse;
 
 class DefaultController extends Controller
 {
-        
     /**
-     * @Route("/choix/{id}", name="afficher_questionnaire")
+     * @Route("/" , name ="index")
+     */
+    public function indexAction(){
+        $user = $this->getUser();
+        $userName = $user->getUsername();
+        $em = $this->getDoctrine()->getManager();
+        $questionnaires = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->findAll();
+        if (!$questionnaires) {
+            throw $this->createNotFoundException('Aucun questionnaire n\'a été trouvé');
+        }
+
+        return $this->render('ItechSupQuestionnaireBundle:Default:index.html.twig', array(
+            'questionnaires' => $questionnaires,
+            'name' => $userName,
+        ));
+    }
+
+    /**
+     * @Route("/user/questionnaire/{id}", name="afficher_questionnaire")
      * 
      */
     public function afficherAction($id){
@@ -34,29 +51,15 @@ class DefaultController extends Controller
     public function validationAction($id){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        
         foreach($_POST as $key=>$value){
             $question=$em->getRepository('ItechSupQuestionnaireBundle:Question')->find($key);
-            $etudiant=$em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->find($user->getId());
-            $this->insertRep($question,$value,$etudiant);
-        }
-        return $this->render('ItechSupQuestionnaireBundle:Default:index.html.twig');
-    }
-    
-    /**
-     * @Route("/admin/resume/{id}", name="resumeQuestionnaire")
-     * 
-     */
-    public function resumeAction($id){
-        $em = $this->getDoctrine()->getManager();
-        $questionnaire = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
-        if (!$questionnaire) {
-            throw $this->createNotFoundException('Impossible de trouver ce questionnaire');
+            if($question !== null){
+                $this->insertRep($question,$value,$user);
+            }
         }
         
-        return $this->render('ItechSupQuestionnaireBundle:Default:resume.html.twig', array(
-            'questionnaire' => $questionnaire,
-        ));
+        return $this->redirect($this->generateUrl('index'));
+        
     }
     
     /**
@@ -72,7 +75,7 @@ class DefaultController extends Controller
         $reponse = new Reponse();
         $reponse->setNote($value);
         $reponse->setQuestion($question);
-        $reponse->setEtudiant($user);
+        $reponse->setUser($user);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($reponse);

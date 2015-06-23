@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ItechSup\QuestionnaireBundle\Entity\Questionnaire;
-use ItechSup\QuestionnaireBundle\Form\QuestionnaireType;
+use ItechSup\QuestionnaireBundle\Entity\Etudiant;
+use ItechSup\QuestionnaireBundle\Form\EtudiantType;
 
 /**
- * Questionnaire controller.
+ * Etudiant controller.
  *
- * @Route("/admin/questionnaire")
+ * @Route("/etudiant")
  */
-class QuestionnaireController extends Controller
+class EtudiantController extends Controller
 {
 
     /**
-     * Lists all Questionnaire entities.
+     * Lists all Etudiant entities.
      *
-     * @Route("/", name="questionnaire")
+     * @Route("/", name="etudiant")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class QuestionnaireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->findAll();
+        $entities = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Questionnaire entity.
+     * Creates a new Etudiant entity.
      *
-     * @Route("/", name="questionnaire_create")
+     * @Route("/", name="etudiant_create")
      * @Method("POST")
-     * @Template("ItechSupQuestionnaireBundle:Questionnaire:new.html.twig")
+     * @Template("ItechSupQuestionnaireBundle:Etudiant:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Questionnaire();
+        $entity = new Etudiant();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class QuestionnaireController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionnaire_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('etudiant_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class QuestionnaireController extends Controller
     }
 
     /**
-     * Creates a form to create a Questionnaire entity.
+     * Creates a form to create a Etudiant entity.
      *
-     * @param Questionnaire $entity The entity
+     * @param Etudiant $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Questionnaire $entity)
+    private function createCreateForm(Etudiant $entity)
     {
-        $form = $this->createForm(new QuestionnaireType(), $entity, array(
-            'action' => $this->generateUrl('questionnaire_create'),
+        $form = $this->createForm(new EtudiantType(), $entity, array(
+            'action' => $this->generateUrl('etudiant_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class QuestionnaireController extends Controller
     }
 
     /**
-     * Displays a form to create a new Questionnaire entity.
+     * Displays a form to create a new Etudiant entity.
      *
-     * @Route("/new", name="questionnaire_new")
+     * @Route("/new", name="etudiant_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Questionnaire();
+        $entity = new Etudiant();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class QuestionnaireController extends Controller
     }
 
     /**
-     * Finds and displays a Questionnaire entity.
+     * Finds and displays a Etudiant entity.
      *
-     * @Route("/{id}", name="questionnaire_show")
+     * @Route("/{id}", name="etudiant_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class QuestionnaireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Questionnaire entity.');
+            throw $this->createNotFoundException('Unable to find Etudiant entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class QuestionnaireController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Questionnaire entity.
+     * Displays a form to edit an existing Etudiant entity.
      *
-     * @Route("/{id}/edit", name="questionnaire_edit")
+     * @Route("/{id}/edit", name="etudiant_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class QuestionnaireController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Questionnaire entity.');
+            throw $this->createNotFoundException('Unable to find Etudiant entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class QuestionnaireController extends Controller
     }
 
     /**
-    * Creates a form to edit a Questionnaire entity.
+    * Creates a form to edit a Etudiant entity.
     *
-    * @param Questionnaire $entity The entity
+    * @param Etudiant $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Questionnaire $entity)
+    private function createEditForm(Etudiant $entity)
     {
-        $form = $this->createForm(new QuestionnaireType(), $entity, array(
-            'action' => $this->generateUrl('questionnaire_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new EtudiantType(), $entity, array(
+            'action' => $this->generateUrl('etudiant_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class QuestionnaireController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Questionnaire entity.
+     * Edits an existing Etudiant entity.
      *
-     * @Route("/{id}", name="questionnaire_update")
+     * @Route("/{id}", name="etudiant_update")
      * @Method("PUT")
-     * @Template("ItechSupQuestionnaireBundle:Questionnaire:edit.html.twig")
+     * @Template("ItechSupQuestionnaireBundle:Etudiant:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Questionnaire entity.');
+            throw $this->createNotFoundException('Unable to find Etudiant entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class QuestionnaireController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('questionnaire_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('etudiant_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class QuestionnaireController extends Controller
         );
     }
     /**
-     * Deletes a Questionnaire entity.
+     * Deletes a Etudiant entity.
      *
-     * @Route("/{id}", name="questionnaire_delete")
+     * @Route("/{id}", name="etudiant_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class QuestionnaireController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
+            $entity = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Questionnaire entity.');
+                throw $this->createNotFoundException('Unable to find Etudiant entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('questionnaire'));
+        return $this->redirect($this->generateUrl('etudiant'));
     }
 
     /**
-     * Creates a form to delete a Questionnaire entity by id.
+     * Creates a form to delete a Etudiant entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class QuestionnaireController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('questionnaire_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('etudiant_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

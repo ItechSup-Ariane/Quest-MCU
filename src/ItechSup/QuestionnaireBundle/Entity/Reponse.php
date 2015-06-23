@@ -36,10 +36,10 @@ class Reponse
     private $question;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Etudiant",inversedBy="reponses")
-     * @ORM\JoinColumn(name="etudiant_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User",inversedBy="reponses")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
-    private $etudiant;
+    private $user;
     
     
     public function __construct() {
@@ -102,29 +102,27 @@ class Reponse
         return $this->question;
     }
     
-    
-
     /**
-     * Set etudiant
+     * Set user
      *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     * @param \ItechSup\QuestionnaireBundle\Entity\User $user
      *
      * @return Reponse
      */
-    public function setEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant = null)
+    public function setUser(\ItechSup\QuestionnaireBundle\Entity\User $user = null)
     {
-        $this->etudiant = $etudiant;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get etudiant
+     * Get user
      *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Etudiant
+     * @return \ItechSup\QuestionnaireBundle\Entity\User
      */
-    public function getEtudiant()
+    public function getUser()
     {
-        return $this->etudiant;
+        return $this->user;
     }
 }

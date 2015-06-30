@@ -17,7 +17,10 @@ class QuestionnaireType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('formations', 'entity', array('class' => 'ItechSupQuestionnaireBundle:Formation', 'multiple' => true, 'property' => 'libelle'))
+            ->add('formations', 'entity', array(
+              'class' => 'ItechSupQuestionnaireBundle:Formation',
+              'multiple' => true,
+              'property' => 'getCompleteName'))
         ;
     }
 

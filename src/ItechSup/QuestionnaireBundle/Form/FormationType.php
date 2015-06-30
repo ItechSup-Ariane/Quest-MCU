@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class FormationType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -17,17 +18,16 @@ class FormationType extends AbstractType
         $builder
             ->add('libelle')
             ->add('promotion')
-            ->add('questionnaires', 'entity', array('class' => 'ItechSupQuestionnaireBundle:Questionnaire', 'multiple' => true, 'property' => 'titre'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Formation'
+          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Formation'
         ));
     }
 
@@ -38,4 +38,5 @@ class FormationType extends AbstractType
     {
         return 'itechsup_questionnairebundle_formation';
     }
+
 }

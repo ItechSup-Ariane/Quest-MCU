@@ -157,41 +157,7 @@ class Questionnaire
         return $this->commentaires;
     }
 
-    /**
-     * Add etudiant
-     *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
-     *
-     * @return Questionnaire
-     */
-    public function addEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
-    {
-        $this->etudiants[] = $etudiant;
-
-        return $this;
-    }
-
-    /**
-     * Remove etudiant
-     *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
-     */
-    public function removeEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
-    {
-        $this->etudiants->removeElement($etudiant);
-    }
-
-    /**
-     * Get etudiants
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEtudiants()
-    {
-        return $this->etudiants;
-    }
-
-
+   
     /**
      * Add formation
      *
@@ -225,4 +191,6 @@ class Questionnaire
     {
         return $this->formations;
     }
+    
+    
 }

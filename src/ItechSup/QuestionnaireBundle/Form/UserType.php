@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -16,20 +15,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('questionnaires', 'entity', array('class' => 'ItechSupQuestionnaireBundle:Questionnaire', 'multiple' => true, 'property' => 'libelle'))
-            ->add('formation', null, array('property' => 'libelle'))
+            ->add('formation')
         ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\User'
+            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\User'
         ));
     }
 
@@ -40,5 +36,4 @@ class UserType extends AbstractType
     {
         return 'itechsup_questionnairebundle_user';
     }
-
 }

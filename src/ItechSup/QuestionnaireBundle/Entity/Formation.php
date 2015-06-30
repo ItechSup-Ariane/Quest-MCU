@@ -3,6 +3,7 @@
 namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Formation
@@ -176,5 +177,13 @@ class Formation
     public function getQuestionnaires()
     {
         return $this->questionnaires;
+    }
+    
+    /**
+     * Return string with the name and the promotion of the formation
+     * @return string
+     */
+    public function getCompleteName(){
+        return $this->getLibelle().' - '.$this->getPromotion();
     }
 }

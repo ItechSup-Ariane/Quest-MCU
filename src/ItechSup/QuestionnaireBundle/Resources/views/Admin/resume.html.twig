@@ -1,27 +1,30 @@
 {% block body %}
     <h1>Récapitulatif questionnaire : {{ questionnaire.titre }}</h1>
     <table class="questionnaire">
-            <tbody>
-                {% for categ in questionnaire.categories %}
+        <tbody>
+            {% for categ in questionnaire.categories %}
+                <tr>
+                    <td><strong><u>{{ categ.libelle }}</u></strong></td>
+                </tr>
+                {% for quest in categ.questions %}
                     <tr>
-                        <td><strong><u>{{ categ.libelle }}</u></strong></td>
-                    </tr>
-                    {% for quest in categ.questions %}
-                        <tr>
-                            <td><i>{{ quest.libelle }}</i></td>
-                            {% set i=1 %}
-                            {% set somme=0 %}
-                            {% for rep in quest.reponses %}    
-                                {% set somme =somme + rep.note %}
-                                {% set i= i+1 %}
-                            {% endfor %}    
-                            {% set moy= somme/i %}
-                            <td><label>Moyenne:</label>{{somme}}</td>
+                        <td><i>{{ quest.libelle }}</i></td>
+                        {% set i=0 %}
+                        {% set somme=0 %}
+                        {% for rep in quest.reponses %}    
+                            {% set somme =somme + rep.note %}
+                            {% set i= i+1 %}
+                        {% endfor %}    
+                        {% set moy= somme/i %}
+                        <td><label>Moyenne:</label>{{moy|number_format(2, '.', ',')}}</td>
 
-                        </tr>
-                    {% endfor %}    
-                {% endfor %}
-                
-            </tbody>
-        </table>
+                    </tr>
+                {% endfor %}    
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <form action={{ path('index_admin') }}>
+        <input type='submit'  value='Retour'/>
+    </form>
 {% endblock %}

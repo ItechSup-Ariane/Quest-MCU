@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Question
 {
+
     /**
      * @var integer
      *
@@ -36,27 +37,26 @@ class Question
      * @ORM\JoinColumn(name="categorie_id",referencedColumnName="id")
      */
     private $categorie;
-    
+
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Reponse",mappedBy="question")
      */
     private $reponses;
-    
+
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="question")
      */
     private $commentaire;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->commentaire = new ArrayCollection();
         $this->reponses = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -115,8 +115,6 @@ class Question
     {
         return $this->categorie;
     }
-
-
 
     /**
      * Add commentaire
@@ -185,4 +183,5 @@ class Question
     {
         return $this->reponses;
     }
+
 }

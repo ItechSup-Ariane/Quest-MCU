@@ -4,7 +4,7 @@
         <ul>
             {% for questionnaire in questionnaires %}
                 <li><a href={{ path('resumeQuestionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.titre }}</a></li>
-            {% endfor %}
+                {% endfor %}
         </ul>
     </div>
     <div name='gestionQuestionnaire'>
@@ -12,8 +12,9 @@
             <li><a href={{ path('questionnaire')}}>Gestion des questionnaires</a></li>
             <li><a href={{ path('categorie')}}>Gestion des catégories</a></li>
             <li><a href={{ path('question')}}>Gestion des questions</a></li>
+            <li><a href={{ path('formation')}}>Gestion des formations</a></li>
             <li><a href={{ path('user')}}>Gestion des utilisateurs</a></li>
         </ul>
     </div>
-                
+
 {% endblock %}

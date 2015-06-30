@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Reponse
 {
+
     /**
      * @var integer
      *
@@ -28,21 +29,21 @@ class Reponse
      * @ORM\Column(name="note", type="string", length=255)
      */
     private $note;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Question",inversedBy="reponses")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
-     **/
+     * */
     private $question;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User",inversedBy="reponses")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     **/
+     * */
     private $user;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->commentaire = new ArrayCollection();
     }
 
@@ -78,7 +79,7 @@ class Reponse
     {
         return $this->note;
     }
-    
+
     /**
      * Set question
      *
@@ -101,7 +102,7 @@ class Reponse
     {
         return $this->question;
     }
-    
+
     /**
      * Set user
      *
@@ -125,4 +126,5 @@ class Reponse
     {
         return $this->user;
     }
+
 }

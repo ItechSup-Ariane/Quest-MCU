@@ -32,9 +32,10 @@ class EtudiantController extends Controller
         $entities = $em->getRepository('ItechSupQuestionnaireBundle:Etudiant')->findAll();
 
         return array(
-            'entities' => $entities,
+          'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Etudiant entity.
      *
@@ -57,8 +58,8 @@ class EtudiantController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -72,8 +73,8 @@ class EtudiantController extends Controller
     private function createCreateForm(Etudiant $entity)
     {
         $form = $this->createForm(new EtudiantType(), $entity, array(
-            'action' => $this->generateUrl('etudiant_create'),
-            'method' => 'POST',
+          'action' => $this->generateUrl('etudiant_create'),
+          'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -91,11 +92,11 @@ class EtudiantController extends Controller
     public function newAction()
     {
         $entity = new Etudiant();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -119,8 +120,8 @@ class EtudiantController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -145,30 +146,31 @@ class EtudiantController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Etudiant entity.
-    *
-    * @param Etudiant $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Etudiant entity.
+     *
+     * @param Etudiant $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Etudiant $entity)
     {
         $form = $this->createForm(new EtudiantType(), $entity, array(
-            'action' => $this->generateUrl('etudiant_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+          'action' => $this->generateUrl('etudiant_update', array('id' => $entity->getId())),
+          'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Etudiant entity.
      *
@@ -197,11 +199,12 @@ class EtudiantController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Etudiant entity.
      *
@@ -238,10 +241,11 @@ class EtudiantController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('etudiant_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                ->setAction($this->generateUrl('etudiant_delete', array('id' => $id)))
+                ->setMethod('DELETE')
+                ->add('submit', 'submit', array('label' => 'Delete'))
+                ->getForm()
         ;
     }
+
 }

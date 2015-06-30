@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CategorieType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -19,14 +20,14 @@ class CategorieType extends AbstractType
             ->add('questionnaire', null, array('property' => 'titre'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Categorie'
+          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Categorie'
         ));
     }
 
@@ -37,4 +38,5 @@ class CategorieType extends AbstractType
     {
         return 'itechsup_questionnairebundle_categorie';
     }
+
 }

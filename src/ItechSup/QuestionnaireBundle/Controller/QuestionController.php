@@ -32,9 +32,10 @@ class QuestionController extends Controller
         $entities = $em->getRepository('ItechSupQuestionnaireBundle:Question')->findAll();
 
         return array(
-            'entities' => $entities,
+          'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Question entity.
      *
@@ -57,8 +58,8 @@ class QuestionController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -72,8 +73,8 @@ class QuestionController extends Controller
     private function createCreateForm(Question $entity)
     {
         $form = $this->createForm(new QuestionType(), $entity, array(
-            'action' => $this->generateUrl('question_create'),
-            'method' => 'POST',
+          'action' => $this->generateUrl('question_create'),
+          'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -91,11 +92,11 @@ class QuestionController extends Controller
     public function newAction()
     {
         $entity = new Question();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -119,8 +120,8 @@ class QuestionController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -145,30 +146,31 @@ class QuestionController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Question entity.
-    *
-    * @param Question $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Question entity.
+     *
+     * @param Question $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Question $entity)
     {
         $form = $this->createForm(new QuestionType(), $entity, array(
-            'action' => $this->generateUrl('question_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+          'action' => $this->generateUrl('question_update', array('id' => $entity->getId())),
+          'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Question entity.
      *
@@ -197,11 +199,12 @@ class QuestionController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Question entity.
      *
@@ -238,10 +241,11 @@ class QuestionController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('question_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                ->setAction($this->generateUrl('question_delete', array('id' => $id)))
+                ->setMethod('DELETE')
+                ->add('submit', 'submit', array('label' => 'Delete'))
+                ->getForm()
         ;
     }
+
 }

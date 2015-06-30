@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+
     /**
      * @var integer
      *
@@ -34,6 +35,12 @@ class Formation
      * @ORM\Column(name="promotion", type="string", length=255)
      */
     private $promotion;
+    
+     /**
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Questionnaire", mappedBy="formations")
+     * */
+    private $questionnaires;
 
     /**
      *
@@ -41,11 +48,12 @@ class Formation
      * @ORM\OneToMany(targetEntity="User",mappedBy="formation")
      */
     private $etudiants;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->etudiants = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -133,5 +141,40 @@ class Formation
     public function getEtudiants()
     {
         return $this->etudiants;
+    }
+
+
+    /**
+     * Add questionnaire
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire
+     *
+     * @return Formation
+     */
+    public function addQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire)
+    {
+        $this->questionnaires[] = $questionnaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove questionnaire
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire
+     */
+    public function removeQuestionnaire(\ItechSup\QuestionnaireBundle\Entity\Questionnaire $questionnaire)
+    {
+        $this->questionnaires->removeElement($questionnaire);
+    }
+
+    /**
+     * Get questionnaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestionnaires()
+    {
+        return $this->questionnaires;
     }
 }

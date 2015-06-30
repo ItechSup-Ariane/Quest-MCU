@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formation
 {
+
     /**
      * @var integer
      *
@@ -34,18 +35,25 @@ class Formation
      * @ORM\Column(name="promotion", type="string", length=255)
      */
     private $promotion;
+    
+     /**
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Questionnaire", mappedBy="formations")
+     * */
+    private $questionnaires;
 
     /**
      *
      * @var ArrayCollection()
-     * @ORM\OneToMany(targetEntity="Etudiant",mappedBy="formation")
+     * @ORM\OneToMany(targetEntity="User",mappedBy="formation")
      */
     private $etudiants;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->etudiants = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -134,4 +142,5 @@ class Formation
     {
         return $this->etudiants;
     }
+
 }

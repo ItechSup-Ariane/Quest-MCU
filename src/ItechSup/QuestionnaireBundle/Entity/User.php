@@ -17,29 +17,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-    
+
     /**
-     * @var ArrayCollection()
-     * @ORM\ManyToMany(targetEntity="Questionnaire", inversedBy="etudiants")
-     * @ORM\JoinTable(name="etudiants_questionnaires")
-     **/
-     protected $questionnaires;
-    
-     
-     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Reponse",mappedBy="etudiant")
      */
     protected $reponses;
-    
+
     /**
      *
      * @var Formation
@@ -47,14 +39,22 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="formation_id",referencedColumnName="id")
      */
     protected $formation;
-    
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
     }
 
-    
+    /**
+     * Get Id
+     *
+     * @return string
+     */
+    function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set nom
@@ -195,4 +195,5 @@ class User extends BaseUser
     {
         return $this->formation;
     }
+
 }

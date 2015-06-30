@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Categorie
 {
+
     /**
      * @var integer
      *
@@ -36,20 +37,19 @@ class Categorie
      * @ORM\JoinColumn(name="questionnaire_id",referencedColumnName="id")
      */
     private $questionnaire;
-    
+
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Question",mappedBy="categorie")
      */
     private $questions;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->questions = new ArrayCollection();
     }
-    
-    
+
     /**
      * Get id
      *
@@ -138,4 +138,5 @@ class Categorie
     {
         return $this->questions;
     }
+
 }

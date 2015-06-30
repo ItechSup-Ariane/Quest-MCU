@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Periode
 {
+
     /**
      * @var integer
      *
@@ -34,7 +35,6 @@ class Periode
      * @ORM\Column(name="fin", type="string", length=255)
      */
     private $fin;
-
 
     /**
      * Get id
@@ -91,4 +91,5 @@ class Periode
     {
         return $this->fin;
     }
+
 }

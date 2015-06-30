@@ -25,15 +25,17 @@ class CommentaireController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ItechSupQuestionnaireBundle:Commentaire')->findAll();
 
         return array(
-            'entities' => $entities,
+          'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Commentaire entity.
      *
@@ -56,8 +58,8 @@ class CommentaireController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -71,8 +73,8 @@ class CommentaireController extends Controller
     private function createCreateForm(Commentaire $entity)
     {
         $form = $this->createForm(new CommentaireType(), $entity, array(
-            'action' => $this->generateUrl('commentaire_create'),
-            'method' => 'POST',
+          'action' => $this->generateUrl('commentaire_create'),
+          'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
@@ -90,11 +92,11 @@ class CommentaireController extends Controller
     public function newAction()
     {
         $entity = new Commentaire();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+          'entity' => $entity,
+          'form' => $form->createView(),
         );
     }
 
@@ -118,8 +120,8 @@ class CommentaireController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -144,30 +146,31 @@ class CommentaireController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Commentaire entity.
-    *
-    * @param Commentaire $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Commentaire entity.
+     *
+     * @param Commentaire $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Commentaire $entity)
     {
         $form = $this->createForm(new CommentaireType(), $entity, array(
-            'action' => $this->generateUrl('commentaire_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+          'action' => $this->generateUrl('commentaire_update', array('id' => $entity->getId())),
+          'method' => 'PUT',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Commentaire entity.
      *
@@ -196,11 +199,12 @@ class CommentaireController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity' => $entity,
+          'edit_form' => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Commentaire entity.
      *
@@ -237,10 +241,11 @@ class CommentaireController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('commentaire_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                ->setAction($this->generateUrl('commentaire_delete', array('id' => $id)))
+                ->setMethod('DELETE')
+                ->add('submit', 'submit', array('label' => 'Delete'))
+                ->getForm()
         ;
     }
+
 }

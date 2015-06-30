@@ -12,37 +12,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionnaireRepository extends EntityRepository
 {
-    public function findGraph($id){
-     $query = $this->getEntityManager()
-        ->createQuery('
-            SELECT q.id as idquestionnaire,q.titre,c.id as idcategorie,c.libelle as lblcategorie,qt.id as idquestion,qt.libelle as lblquestion,r.id as idreponse,r.note FROM ItechSupQuestionnaireBundle:Questionnaire q
-            JOIN q.Categorie c
-            JOIN c.Question qt
-            JOIN qt.Reponse r
-            WHERE q.id = :id
-            ORDER BY q,c,qt'
-        )->setParameter('id', $id);
 
-    try {
-        return $query->getResult();
-    } catch (\Doctrine\ORM\NoResultException $e) {
-        return null;
-    }
-}
-    public function findAllCategories($titre){
-     $query = $this->getEntityManager()
-        ->createQuery('
-            SELECT c FROM ItechSupQuestionnaireBundle:Categorie c
-            JOIN c.Questionnaire q
-            WHERE q.titre = :titre'
-        )->setParameter('titre', $titre);
+    /**
+     * Select questionnaires which are not complete by this user
+     * 
+     * @param int $user
+     * @return string
+     */
+    public function findAllIsNotComplete($user)
+    {
+        $query = $this->getEntityManager()
+                ->createQuery('
+            SELECT quest FROM ItechSupQuestionnaireBundle:Questionnaire quest
+            WHERE quest.id NOT IN(
+            SELECT DISTINCT q.id FROM ItechSupQuestionnaireBundle:Reponse r
+            JOIN r.question qt
+            JOIN qt.categorie c
+            JOIN c.questionnaire q
+            WHERE r.user = :idUser)'
+                )->setParameter('idUser', $user);
 
-    try {
-        return $query->getSingleResult();
-    } catch (\Doctrine\ORM\NoResultException $e) {
-        return null;
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
-    
-    
-}
+
 }

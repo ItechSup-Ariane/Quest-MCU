@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ItechSup\QuestionnaireBundle\Entity\Categorie;
-use ItechSup\QuestionnaireBundle\Form\CategorieType;
+use ItechSup\QuestionnaireBundle\Entity\Formation;
+use ItechSup\QuestionnaireBundle\Form\FormationType;
 
 /**
- * Categorie controller.
+ * Formation controller.
  *
- * @Route("/categorie")
+ * @Route("/admin/formation")
  */
-class CategorieController extends Controller
+class FormationController extends Controller
 {
 
     /**
-     * Lists all Categorie entities.
+     * Lists all Formation entities.
      *
-     * @Route("/", name="categorie")
+     * @Route("/", name="formation")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class CategorieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->findAll();
+        $entities = $em->getRepository('ItechSupQuestionnaireBundle:Formation')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Categorie entity.
+     * Creates a new Formation entity.
      *
-     * @Route("/", name="categorie_create")
+     * @Route("/", name="formation_create")
      * @Method("POST")
-     * @Template("ItechSupQuestionnaireBundle:Categorie:new.html.twig")
+     * @Template("ItechSupQuestionnaireBundle:Formation:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Categorie();
+        $entity = new Formation();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class CategorieController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categorie_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('formation_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class CategorieController extends Controller
     }
 
     /**
-     * Creates a form to create a Categorie entity.
+     * Creates a form to create a Formation entity.
      *
-     * @param Categorie $entity The entity
+     * @param Formation $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Categorie $entity)
+    private function createCreateForm(Formation $entity)
     {
-        $form = $this->createForm(new CategorieType(), $entity, array(
-            'action' => $this->generateUrl('categorie_create'),
+        $form = $this->createForm(new FormationType(), $entity, array(
+            'action' => $this->generateUrl('formation_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class CategorieController extends Controller
     }
 
     /**
-     * Displays a form to create a new Categorie entity.
+     * Displays a form to create a new Formation entity.
      *
-     * @Route("/new", name="categorie_new")
+     * @Route("/new", name="formation_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Categorie();
+        $entity = new Formation();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class CategorieController extends Controller
     }
 
     /**
-     * Finds and displays a Categorie entity.
+     * Finds and displays a Formation entity.
      *
-     * @Route("/{id}", name="categorie_show")
+     * @Route("/{id}", name="formation_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class CategorieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Formation')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Formation entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class CategorieController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Categorie entity.
+     * Displays a form to edit an existing Formation entity.
      *
-     * @Route("/{id}/edit", name="categorie_edit")
+     * @Route("/{id}/edit", name="formation_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class CategorieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Formation')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Formation entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class CategorieController extends Controller
     }
 
     /**
-    * Creates a form to edit a Categorie entity.
+    * Creates a form to edit a Formation entity.
     *
-    * @param Categorie $entity The entity
+    * @param Formation $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Categorie $entity)
+    private function createEditForm(Formation $entity)
     {
-        $form = $this->createForm(new CategorieType(), $entity, array(
-            'action' => $this->generateUrl('categorie_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new FormationType(), $entity, array(
+            'action' => $this->generateUrl('formation_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class CategorieController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Categorie entity.
+     * Edits an existing Formation entity.
      *
-     * @Route("/{id}", name="categorie_update")
+     * @Route("/{id}", name="formation_update")
      * @Method("PUT")
-     * @Template("ItechSupQuestionnaireBundle:Categorie:edit.html.twig")
+     * @Template("ItechSupQuestionnaireBundle:Formation:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->find($id);
+        $entity = $em->getRepository('ItechSupQuestionnaireBundle:Formation')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Formation entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class CategorieController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('categorie_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('formation_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class CategorieController extends Controller
         );
     }
     /**
-     * Deletes a Categorie entity.
+     * Deletes a Formation entity.
      *
-     * @Route("/{id}", name="categorie_delete")
+     * @Route("/{id}", name="formation_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class CategorieController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->find($id);
+            $entity = $em->getRepository('ItechSupQuestionnaireBundle:Formation')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Categorie entity.');
+                throw $this->createNotFoundException('Unable to find Formation entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('categorie'));
+        return $this->redirect($this->generateUrl('formation'));
     }
 
     /**
-     * Creates a form to delete a Categorie entity by id.
+     * Creates a form to delete a Formation entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class CategorieController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('categorie_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('formation_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

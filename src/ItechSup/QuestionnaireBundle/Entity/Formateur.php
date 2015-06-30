@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Formateur
 {
+
     /**
      * @var integer
      *
@@ -34,7 +35,6 @@ class Formateur
      * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
-
 
     /**
      * Get id
@@ -91,4 +91,5 @@ class Formateur
     {
         return $this->prenom;
     }
+
 }

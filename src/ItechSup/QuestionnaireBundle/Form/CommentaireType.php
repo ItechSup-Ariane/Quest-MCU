@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CommentaireType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -21,14 +22,14 @@ class CommentaireType extends AbstractType
             ->add('question', null, array('property' => 'libelle'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Commentaire'
+          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Commentaire'
         ));
     }
 
@@ -39,4 +40,5 @@ class CommentaireType extends AbstractType
     {
         return 'itechsup_questionnairebundle_commentaire';
     }
+
 }

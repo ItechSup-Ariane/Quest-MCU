@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Commentaire
 {
+
     /**
      * @var integer
      *
@@ -42,15 +43,15 @@ class Commentaire
      * @ORM\JoinColumn(name="questionnaire_id",referencedColumnName="id")
      */
     private $questionnaire;
-    
-     /**
+
+    /**
      *
      * @var Questionnaire
      * @ORM\ManyToOne(targetEntity="Question",inversedBy="commentaires")
      * @ORM\JoinColumn(name="question_id",referencedColumnName="id")
      */
     private $question;
-    
+
     /**
      * Get id
      *
@@ -152,4 +153,5 @@ class Commentaire
     {
         return $this->question;
     }
+
 }

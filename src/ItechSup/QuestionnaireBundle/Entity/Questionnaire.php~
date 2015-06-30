@@ -4,6 +4,7 @@ namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Questionnaire
  *
@@ -12,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Questionnaire
 {
+
     /**
      * @var integer
      *
@@ -29,30 +31,33 @@ class Questionnaire
     private $titre;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Etudiant", mappedBy="questionnaires")
-     **/
-    private $etudiants;
-
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Formation", inversedBy="questionnaires")
+     */
+    private $formations;
+    
+    
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Categorie",mappedBy="questionnaire")
      */
     private $categories;
-    
+
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="questionnaire")
      */
     private $commentaires;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -151,4 +156,39 @@ class Questionnaire
     {
         return $this->commentaires;
     }
+
+    /**
+     * Add etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     *
+     * @return Questionnaire
+     */
+    public function addEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
+    {
+        $this->etudiants[] = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * Remove etudiant
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant
+     */
+    public function removeEtudiant(\ItechSup\QuestionnaireBundle\Entity\Etudiant $etudiant)
+    {
+        $this->etudiants->removeElement($etudiant);
+    }
+
+    /**
+     * Get etudiants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtudiants()
+    {
+        return $this->etudiants;
+    }
+
 }

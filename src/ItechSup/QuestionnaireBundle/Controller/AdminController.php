@@ -14,10 +14,12 @@ use ItechSup\QuestionnaireBundle\Entity\Reponse;
  */
 class AdminController extends Controller
 {
+
     /**
      * @Route("/" , name ="index_admin")
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $questionnaires = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->findAll();
         if (!$questionnaires) {
@@ -25,23 +27,25 @@ class AdminController extends Controller
         }
 
         return $this->render('ItechSupQuestionnaireBundle:Admin:index.html.twig', array(
-            'questionnaires' => $questionnaires,
+              'questionnaires' => $questionnaires,
         ));
-    }   
-    
+    }
+
     /**
      * @Route("/resume/{id}", name="resumeQuestionnaire")
      * 
      */
-    public function resumeAction($id){
+    public function resumeAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $questionnaire = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
         if (!$questionnaire) {
             throw $this->createNotFoundException('Impossible de trouver ce questionnaire');
         }
-        
+
         return $this->render('ItechSupQuestionnaireBundle:Admin:resume.html.twig', array(
-            'questionnaire' => $questionnaire,
+              'questionnaire' => $questionnaire,
         ));
     }
+
 }

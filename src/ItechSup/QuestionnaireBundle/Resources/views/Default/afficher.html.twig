@@ -11,15 +11,15 @@
                         <tr>
                             <td><i>{{ quest.libelle }}</i></td>
 
-                                <td><label>0</label><input type="radio" name={{ quest.id }} value=0></td>
-                                <td><label>1</label><input type="radio" name={{ quest.id }} value=1></td>
-                                <td><label>2</label><input type="radio" name={{ quest.id }} value=2></td>
-                                <td><label>3</label><input type="radio" name={{ quest.id }} value=3></td>
-                                <td><label>4</label><input type="radio" name={{ quest.id }} value=4></td>
+                            <td><label>0</label><input type="radio" name={{ quest.id }} required value=0></td>
+                            <td><label>1</label><input type="radio" name={{ quest.id }} value=1></td>
+                            <td><label>2</label><input type="radio" name={{ quest.id }} value=2></td>
+                            <td><label>3</label><input type="radio" name={{ quest.id }} value=3></td>
+                            <td><label>4</label><input type="radio" name={{ quest.id }} value=4></td>
                         </tr>
                     {% endfor %}    
                 {% endfor %}
-                
+
             </tbody>
         </table>
         <input type="submit" id="submit" value="Envoyer" name="submit">

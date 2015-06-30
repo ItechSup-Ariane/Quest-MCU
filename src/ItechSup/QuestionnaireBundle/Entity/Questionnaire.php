@@ -4,6 +4,7 @@ namespace ItechSup\QuestionnaireBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Questionnaire
  *
@@ -12,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Questionnaire
 {
+
     /**
      * @var integer
      *
@@ -29,30 +31,33 @@ class Questionnaire
     private $titre;
     
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="questionnaires")
-     **/
-    private $etudiants;
-
+     * @var ArrayCollection()
+     * @ORM\ManyToMany(targetEntity="Formation", inversedBy="questionnaires")
+     */
+    private $formations;
+    
+    
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Categorie",mappedBy="questionnaire")
      */
     private $categories;
-    
+
     /**
      *
      * @var ArrayCollection()
      * @ORM\OneToMany(targetEntity="Commentaire",mappedBy="questionnaire")
      */
     private $commentaires;
-    
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->categories = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -184,5 +189,40 @@ class Questionnaire
     public function getEtudiants()
     {
         return $this->etudiants;
+    }
+
+
+    /**
+     * Add formation
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Formation $formation
+     *
+     * @return Questionnaire
+     */
+    public function addFormation(\ItechSup\QuestionnaireBundle\Entity\Formation $formation)
+    {
+        $this->formations[] = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Remove formation
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Formation $formation
+     */
+    public function removeFormation(\ItechSup\QuestionnaireBundle\Entity\Formation $formation)
+    {
+        $this->formations->removeElement($formation);
+    }
+
+    /**
+     * Get formations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormations()
+    {
+        return $this->formations;
     }
 }

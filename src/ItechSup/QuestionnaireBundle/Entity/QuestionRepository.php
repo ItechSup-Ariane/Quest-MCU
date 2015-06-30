@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionRepository extends EntityRepository
 {
+
+    public function findAllByQuestionnaire($idQuestionnaire)
+    {
+        $query = $this->getEntityManager()
+                ->createQuery('
+            SELECT q FROM ItechSupQuestionnaireBundle:Question q
+            JOIN q.categorie c
+            JOIN c.questionnaire qu
+            WHERE qu.id = :idQuestionnaire'
+                )->setParameter('idQuestionnaire', $idQuestionnaire);
+
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
 }

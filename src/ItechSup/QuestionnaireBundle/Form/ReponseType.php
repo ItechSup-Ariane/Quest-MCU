@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ReponseType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -19,14 +20,14 @@ class ReponseType extends AbstractType
             ->add('question', null, array('property' => 'libelle'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Reponse'
+          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Reponse'
         ));
     }
 
@@ -37,4 +38,5 @@ class ReponseType extends AbstractType
     {
         return 'itechsup_questionnairebundle_reponse';
     }
+
 }

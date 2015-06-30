@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuestionnaireType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -16,17 +17,17 @@ class QuestionnaireType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('etudiants','entity',array('class'=>'ItechSupQuestionnaireBundle:User','multiple'=>true,'property'=>'username'))
+            ->add('formations', 'entity', array('class' => 'ItechSupQuestionnaireBundle:Formation', 'multiple' => true, 'property' => 'libelle'))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Questionnaire'
+          'data_class' => 'ItechSup\QuestionnaireBundle\Entity\Questionnaire'
         ));
     }
 
@@ -37,4 +38,5 @@ class QuestionnaireType extends AbstractType
     {
         return 'itechsup_questionnairebundle_questionnaire';
     }
+
 }

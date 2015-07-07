@@ -38,14 +38,20 @@ class Formation
     private $promotion;
     
      /**
-     * @var ArrayCollection()
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Questionnaire", mappedBy="formations")
      * */
     private $questionnaires;
+    
+     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="FOS\UserBundle\Model\User", mappedBy="formations")
+     * */
+    private $users;
 
     /**
      *
-     * @var ArrayCollection()
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="User",mappedBy="formation")
      */
     private $etudiants;
@@ -144,7 +150,18 @@ class Formation
         return $this->etudiants;
     }
 
+    function getUsers()
+    {
+        return $this->users;
+    }
 
+    function setUsers(ArrayCollection $users)
+    {
+        $this->users = $users;
+    }
+
+        
+    
     /**
      * Add questionnaire
      *

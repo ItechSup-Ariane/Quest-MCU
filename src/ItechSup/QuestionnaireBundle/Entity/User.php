@@ -25,6 +25,8 @@ class User extends BaseUser
      */
     protected $id;
 
+    
+    
     /**
      *
      * @var ArrayCollection()
@@ -32,13 +34,6 @@ class User extends BaseUser
      */
     protected $reponses;
 
-    /**
-     *
-     * @var Formation
-     * @ORM\ManyToOne(targetEntity="Formation",inversedBy="etudiants")
-     * @ORM\JoinColumn(name="formation_id",referencedColumnName="id")
-     */
-    protected $formation;
 
     public function __construct()
     {
@@ -90,28 +85,5 @@ class User extends BaseUser
         return $this->reponses;
     }
 
-    /**
-     * Set formation
-     *
-     * @param \ItechSup\QuestionnaireBundle\Entity\Formation $formation
-     *
-     * @return User
-     */
-    public function setFormation(\ItechSup\QuestionnaireBundle\Entity\Formation $formation = null)
-    {
-        $this->formation = $formation;
-
-        return $this;
-    }
-
-    /**
-     * Get formation
-     *
-     * @return \ItechSup\QuestionnaireBundle\Entity\Formation
-     */
-    public function getFormation()
-    {
-        return $this->formation;
-    }
 
 }

@@ -7,7 +7,7 @@
 /app/phpunit.xml
 /bin/
 /composer.phar
-/vendor/
+
 /web/bundles/
 /.idea/
 app/data.db3

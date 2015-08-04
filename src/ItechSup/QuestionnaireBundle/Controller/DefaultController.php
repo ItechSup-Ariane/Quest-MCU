@@ -12,6 +12,9 @@ class DefaultController extends Controller
 {
 
     /**
+     * Call the Default index view with
+     * the list of available survey and the user  
+     * 
      * @Route("/" , name ="index")
      */
     public function indexAction()
@@ -32,6 +35,9 @@ class DefaultController extends Controller
     }
 
     /**
+     * Call the Default afficher view which
+     * display the selected survey
+     * 
      * @Route("/user/questionnaire/{id}", name="afficher_questionnaire")
      * 
      */

@@ -16,6 +16,10 @@ class AdminController extends Controller
 {
 
     /**
+     * Call the Default index view with
+     * the list of survey 
+     * The view show the configuration menu 
+     * 
      * @Route("/" , name ="index_admin")
      */
     public function indexAction()
@@ -32,6 +36,10 @@ class AdminController extends Controller
     }
 
     /**
+     * Call the Admin resume view which
+     * show the average note of questions for 
+     * each survey
+     * 
      * @Route("/resume/{id}", name="resumeQuestionnaire")
      * 
      */

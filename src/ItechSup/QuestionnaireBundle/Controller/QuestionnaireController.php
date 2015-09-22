@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ItechSup\QuestionnaireBundle\Entity\Questionnaire;
+use ItechSup\QuestionnaireBundle\Entity\Categorie;
+use ItechSup\QuestionnaireBundle\Entity\Question;
 use ItechSup\QuestionnaireBundle\Form\QuestionnaireType;
 
 /**
@@ -92,6 +94,10 @@ class QuestionnaireController extends Controller
     public function newAction()
     {
         $entity = new Questionnaire();
+        $category = new Categorie(); 
+        $question = new Question();
+        $category->getQuestions()->add($question);
+        $entity->getCategories()->add($category);
         $form = $this->createCreateForm($entity);
 
         return array(

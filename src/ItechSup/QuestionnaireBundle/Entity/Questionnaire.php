@@ -123,6 +123,18 @@ class Questionnaire
     {
         return $this->categories;
     }
+    
+    /**
+     * Set categories
+     *
+     * @param \ItechSup\QuestionnaireBundle\Entity\Categories $categories
+     * @return Questionnaire 
+     */
+    public function setCategories(ArrayCollection $categories)
+    {
+        
+        $this->categories=$categories;
+    }
 
     /**
      * Add commentaires

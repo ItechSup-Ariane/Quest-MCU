@@ -16,8 +16,13 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
-            ->add('questionnaire', null, array('property' => 'titre'))
+            ->add('libelle','text')
+            ->add('questions', 'collection', array(
+              'type'=> new QuestionType(),
+              'allow_add' => true,
+              'by_reference' => false,
+              'prototype_name' => "__quest__"
+              ))
         ;
     }
 

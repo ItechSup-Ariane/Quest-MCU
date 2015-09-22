@@ -1,9 +1,95 @@
 {% extends '::base.html.twig' %}
 
+{% block javascripts %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+    <script>
+        // Récupère le div qui contient la collection de categories
+        var collectionHolder = $('ul.categories');
+        // ajoute un lien « Ajouter une catégorie »
+        var $addCategoryLink = $('<a href="#" class="add_category_link">Ajouter une catégorie</a>');
+        var $newLinkLi = $('<li></li>').append($addCategoryLink);
+        
+        // Récupère le div qui contient la collection de question
+        var collectionQuestionHolder = $('ul.questions');
+        // ajoute un lien « Ajouter une question »
+        var $addQuestionLink = $('<a href="#" class="add_question_link">Ajouter une question</a>');
+        var $newQuestionLinkLi = $('<li></li>').append($addQuestionLink);
+        
+
+        jQuery(document).ready(function () {
+            // ajoute l'ancre « ajouter une categorie » et li à la balise ul
+            collectionHolder.append($newLinkLi);
+
+            $addCategoryLink.on('click', function (e) {
+                // empêche le lien de créer un « # » dans l'URL
+                e.preventDefault();
+
+                // ajoute un nouveau formulaire categorie
+                addCategoryForm(collectionHolder, $newLinkLi);
+                
+                // ajoute un nouveau formulaire question dans ce formulaire
+                addQuestionForm(collectionQuestionHolder, $newQuestionLinkLi);
+            });
+            
+            collectionQuestionHolder.append($newQuestionLinkLi);
+
+            $addQuestionLink.on('click', function (e) {
+                // empêche le lien de créer un « # » dans l'URL
+                e.preventDefault();
+
+                // ajoute un nouveau formulaire question
+                addQuestionForm(collectionQuestionHolder, $newQuestionLinkLi);
+            });
+        });
+
+        function addCategoryForm(collectionHolder, $newLinkLi) {
+            // Récupère l'élément ayant l'attribut data-prototype
+            var prototype = collectionHolder.attr('data-prototype');
+            // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+            // la longueur de la collection courante
+            var newForm = prototype.replace(/__categ__/g, collectionHolder.children().length);
+            // Affiche le formulaire dans la page dans un li, avant le lien "ajouter une ..."
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+        
+        function addQuestionForm(collectionHolder, $newLinkLi) {
+            // Récupère l'élément ayant l'attribut data-prototype
+            var prototype = collectionHolder.attr('data-prototype');
+            // Remplace '__name__' dans le HTML du prototype par un nombre basé sur
+            // la longueur de la collection courante
+            var newForm = prototype.replace(/__quest__/g, collectionHolder.children().length);
+            // Affiche le formulaire dans la page dans un li, avant le lien "ajouter une ..."
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+ 
+
+    </script>
+{% endblock %}
+
 {% block body -%}
     <h1>Questionnaire creation</h1>
 
-    {{ form(form) }}
+    <form action="..." method="POST" {{ form_enctype(form) }}>
+
+        {{ form_row(form.titre) }}
+
+        <ul class="categories" data-prototype="{{ form_widget(form.categories.vars.prototype)|e }}">
+            {% for categorie in form.categories %}
+                <li>{{ form_row(categorie.libelle) }}</li>
+                <p>------------------------------------------------------------</p>
+                <ul class="questions" data-prototype="{{ form_widget(form.categories.vars.prototype.children['questions'].vars.prototype)|e }}">
+                    {% for question in categorie.questions %}
+                        <li>{{ form_row(question.libelle) }}</li>
+                    {% endfor %}
+                </ul>  
+                <p>------------------------------------------------------------</p>
+            {% endfor %}
+        </ul>
+
+    </form>
 
     <ul class="record_actions">
         <li>
@@ -12,4 +98,6 @@
             </a>
         </li>
     </ul>
+
 {% endblock %}
+

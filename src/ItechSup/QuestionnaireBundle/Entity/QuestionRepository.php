@@ -13,15 +13,13 @@ use Doctrine\ORM\EntityRepository;
 class QuestionRepository extends EntityRepository
 {
 
-    public function findAllByQuestionnaire($idQuestionnaire)
+    public function findAllByCategorie($idCateg)
     {
         $query = $this->getEntityManager()
                 ->createQuery('
             SELECT q FROM ItechSupQuestionnaireBundle:Question q
-            JOIN q.categorie c
-            JOIN c.questionnaire qu
-            WHERE qu.id = :idQuestionnaire'
-                )->setParameter('idQuestionnaire', $idQuestionnaire);
+            WHERE q.categorie = :idCateg'
+                )->setParameter('idCateg', $idCateg);
 
         try {
             return $query->getResult();

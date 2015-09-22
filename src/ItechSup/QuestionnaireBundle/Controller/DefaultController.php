@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use ItechSup\QuestionnaireBundle\Entity\Reponse;
 use Symfony\Component\HttpFoundation\Request;
+use ItechSup\QuestionnaireBundle\Form\QuestionnaireType;
 
 class DefaultController extends Controller
 {
@@ -50,6 +51,37 @@ class DefaultController extends Controller
         }
         return $this->render('ItechSupQuestionnaireBundle:Default:afficher.html.twig', array(
               'questionnaire' => $questionnaire,
+        ));
+    }
+
+    /**
+     * Show the selected survey build with formbuilder
+     * 
+     * 
+     * @Route("/user/questionnaireForm/{id}", name="afficherForm_questionnaire")
+     * 
+     */
+    public function afficherFormAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $questionnaire = $em->getRepository('ItechSupQuestionnaireBundle:Questionnaire')->find($id);
+        $categories = $em->getRepository('ItechSupQuestionnaireBundle:Categorie')->findAllByQuestionnaire($id);
+
+        foreach ($categories as $categ) {
+            $questionnaire->getCategories()->add($categ);
+
+            $questions = $em->getRepository('ItechSupQuestionnaireBundle:Question')->findAllByCategorie($categ->getId());
+            
+            foreach ($questions as $question){
+                $categ->getQuestions()->add($question);
+            }
+        }
+
+        $form = $this->createForm(new QuestionnaireType(), $questionnaire);
+
+        return $this->render('ItechSupQuestionnaireBundle:Default:afficherForm.html.twig', array(
+              'form' => $form->createView(),
         ));
     }
 

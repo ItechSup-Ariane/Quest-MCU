@@ -4,7 +4,7 @@
         <ul>
             {% if questionnaires is defined %}
                 {% for questionnaire in questionnaires %}
-                    <li><a href={{ path('afficher_questionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.titre }}</a></li>
+                    <li><a href={{ path('afficherForm_questionnaire', {'id':questionnaire.id}) }}>{{ questionnaire.titre }}</a></li>
                     {% endfor %}
                 {% else %}
                 <li>Il n'y a aucun formulaire que vous n'ayez déjà complété</li>

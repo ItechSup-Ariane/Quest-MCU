@@ -12,19 +12,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategorieRepository extends EntityRepository
 {
-    public function findAllQuestions($id){
-     $query = $this->getEntityManager()
-        ->createQuery('
+
+    public function findAllQuestions($id)
+    {
+        $query = $this->getEntityManager()
+                ->createQuery('
             SELECT q FROM ItechSupQuestionnaireBundle:Question q
             WHERE q.categorie_id = :id'
-        )->setParameter('id', $id);
+                )->setParameter('id', $id);
 
-    try {
-        return $query->getResult();
-    } catch (\Doctrine\ORM\NoResultException $e) {
-        return null;
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
-    
-    
-}
+
+    public function findAllByQuestionnaire($idQuestionnaire)
+    {
+        $query = $this->getEntityManager()
+                ->createQuery('
+            SELECT c FROM ItechSupQuestionnaireBundle:Categorie c
+            WHERE c.questionnaire = :idQuestionnaire'
+                )->setParameter('idQuestionnaire', $idQuestionnaire);
+
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
 }

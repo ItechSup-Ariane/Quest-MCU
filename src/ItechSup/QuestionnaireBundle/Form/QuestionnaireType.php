@@ -16,11 +16,13 @@ class QuestionnaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-            ->add('formations', 'entity', array(
-              'class' => 'ItechSupQuestionnaireBundle:Formation',
-              'multiple' => true,
-              'property' => 'getCompleteName'))
+            ->add('titre','text')
+            ->add('categories', 'collection', array(
+              'type'=> new CategorieType(),
+              'allow_add' => true,
+              'by_reference' => false,
+              'prototype_name' => '__categ__'
+              ))
         ;
     }
 
